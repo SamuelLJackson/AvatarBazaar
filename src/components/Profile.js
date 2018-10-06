@@ -20,6 +20,16 @@ class Profile extends Component{
           ]
       }
     }
+    componentDidMount(){
+        var CharacterContract = new web3.eth.Contract(abi,
+            address, {from: this.props.userAddress});
+            CharacterContract.methods.viewCharacterData(0).call()
+            .then(function(result){
+            //the result holds your Token Balance that you can assign to a var
+            console.log(result)
+            return result;
+        });
+    }
     renderRows = () => {
       if (this.state.loading) {
         return <Loading />
