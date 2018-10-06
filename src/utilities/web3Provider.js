@@ -7,10 +7,7 @@ if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') {
 } else {
 
   window.addEventListener('message', ({ data }) => {
-    if (data && data.type && data.type === 'ETHEREUM_PROVIDER_SUCCESS') {
-        // Use injected provider, start dapp...
-        web3 = new Web3(ethereum);
-    }
+    console.log('hey')
   });
   // Request provider
   window.postMessage({ type: 'ETHEREUM_PROVIDER_REQUEST' }, '*');

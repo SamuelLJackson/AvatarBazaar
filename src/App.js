@@ -7,15 +7,18 @@ import './App.css';
 class App extends Component {
   constructor(props){
     super(props)
-    this.state = {isConnected: false}
+    this.state = {isConnected: false,userAccount:null}
   }
   checkUserConnection(){
-    const accounts = web3.eth.getAccounts();
-    console.log(accounts)
-    return Boolean(accounts.length)
+    const accounts = web3.eth.getAccounts((error, accounts )=>{
+      this.setState({userAccount: accounts[0]})
+    })
+  }
+  componentWillMount(){
+    this.checkUserConnection();
   }
   render() {
-    if (this.checkUserConnection()){
+    if (this.state.userAccount != null){
       return (
         <div>
           {/*<Navbar />*/}
@@ -23,7 +26,7 @@ class App extends Component {
             <a href="/">Profile</a>
             <a href="/">Ludius Auction</a>
           </div>
-          <Profile />
+          <Profile userAccount={this.state.userAccount}/>
         </div>
       )
     } else {
