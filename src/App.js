@@ -5,7 +5,6 @@ import web3 from './utilities/web3Provider.js'
 import './App.css';
 import {abi,address} from './contracts/avatarBazaarAbi.js'
 
-
 class App extends Component {
   constructor(props){
     super(props)
@@ -18,6 +17,7 @@ class App extends Component {
     this.toggleDisplay = this.toggleDisplay.bind(this)
 
     this.handleChange = this.handleChange.bind(this)
+    this.createCharacters = this.createCharacters.bind(this)
   }
   checkUserConnection(){
     const accounts = web3.eth.getAccounts((error, accounts )=>{
@@ -42,10 +42,17 @@ class App extends Component {
     }));
   }
 
-
   handleChange(event) {
     this.setState({charName: event.target.value});
   }
+  createCharacters(){
+    console.log(this.state.charName);
+    var CharacterContract = new web3.eth.Contract(abi,
+        address, {from: this.props.userAccount});
+    CharacterContract.methods.createCharacter(this.state.charName).send({from:this.state.userAccount}).then(function(result){
+       console.log(result);
+       })
+    }
   render() {
     if (this.state.userAccount != null){
       return (
@@ -57,7 +64,7 @@ class App extends Component {
             <a href="/" onClick={this.toggleDisplay}>Ludius Auction</a>
 
             <input type="text" value={this.state.charName} onChange={this.handleChange}></input>
-            <button id="createCharacter" >Create Character</button>
+            <button id="createCharacter" onClick={this.createCharacters}>Create Character</button>
 
           </div>
           {this.display()}
@@ -68,7 +75,5 @@ class App extends Component {
     }
   }
 }
-
-
 
 export default App;
