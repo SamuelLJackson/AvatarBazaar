@@ -47,6 +47,14 @@ class App extends Component {
   handleChange(event) {
     this.setState({charName: event.target.value});
   }
+  openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+  }
+  
   createCharacters(){
     console.log(this.state.charName);
     var CharacterContract = new web3.eth.Contract(abi,
@@ -59,13 +67,19 @@ class App extends Component {
       return (
         <div>
           <div className="nav-bar">
-            <a href="/" className="nav-bar-title">AB</a>
-            <a href="/" onClick={this.toggleDisplay.bind(this, 'profile')}>Profile</a>
-            <a href="/" onClick={this.toggleDisplay.bind(this,'auction')}>Ludius Auction</a>
-
+            <span onClick={this.openNav}>&#9776;</span>
+            <a href="/" className="nav-bar-title">AvatarBazaar</a>
             <input type="text" value={this.state.charName} onChange={this.handleChange}></input>
             <button id="createCharacter" onClick={this.createCharacters}>Create Character</button>
 
+          </div>
+          <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>&times;</a>
+            <a href="#" onClick={this.closeNav}>About</a>
+            <a href="/" onClick={this.closeNav} onClick={this.toggleDisplay.bind(this, 'profile')}>Profile</a>
+            <a href="/" onClick={this.closeNav} onClick={this.toggleDisplay.bind(this, 'auction')}>Bazaar</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
           </div>
           {this.display()}
         </div>
