@@ -150,6 +150,50 @@ var abi = [
 		"type": "function"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "_approved",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	},
+	{
 		"constant": false,
 		"inputs": [
 			{
@@ -198,85 +242,6 @@ var abi = [
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "_characterId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "_weapon",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "_armor",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "_image",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"name": "_achievements",
-				"type": "uint256[]"
-			},
-			{
-				"indexed": false,
-				"name": "_ratCount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "_skeletonCount",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "_totalKills",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "_totalDmg",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "_totalRevives",
-				"type": "uint256"
-			}
-		],
-		"name": "saved",
-		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -368,22 +333,57 @@ var abi = [
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": true,
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "_approved",
-				"type": "address"
+				"indexed": false,
+				"name": "_characterId",
+				"type": "uint256"
 			},
 			{
 				"indexed": false,
-				"name": "_tokenId",
+				"name": "_weapon",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_armor",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_image",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_achievements",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"name": "_ratCount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_skeletonCount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_totalKills",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_totalDmg",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_totalRevives",
 				"type": "uint256"
 			}
 		],
-		"name": "Approval",
+		"name": "saved",
 		"type": "event"
 	},
 	{
@@ -803,25 +803,6 @@ var abi = [
 	},
 	{
 		"constant": true,
-		"inputs": [
-			{
-				"name": "_auctionId",
-				"type": "uint256"
-			}
-		],
-		"name": "getBidsPerAuction",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
 		"inputs": [],
 		"name": "getCharactersPerUser",
 		"outputs": [
@@ -1029,6 +1010,6 @@ var abi = [
 	}
 ]
 
-var address = '0x300563271acfaf2a2d827f8edc63ae2b57d8dfa5'
+var address = '0x7490318174e55680efe0151fbc84c45b10cb309b'
 
 module.exports = {abi: abi, address: address}
