@@ -13,7 +13,7 @@ class Profile extends Component{
 
       this.state = {
           loading: false,
-          showGame: false,
+          showGame: CharacterStill,
           characters: [
           ]
       }
@@ -65,6 +65,47 @@ class Profile extends Component{
              }
             return result;
             });
+        var ForSaleContract = new web3.eth.Contract(abi,
+            address, {from: this.props.userAccount});
+            var self = this;
+            CharacterContract.methods.getCharactersPerUser().call()
+            .then(function(result){
+            //the result holds your Token Balance that you can assign to a var
+            console.log('characterIdArray:')
+            console.log(result)
+            var characterIdArray = result;
+            var i;
+                //Loop Through each Id that is owned
+                for(i in characterIdArray){
+                //Call Id Details [i] is TicketId
+                CharacterContract.methods.viewCharacterDataStepOne(characterIdArray[i]).call()
+                .then(function(result){
+
+                    CharacterContract.methods.viewCharacterDataStepTwo(characterIdArray[i]).call().then(function(resultTwo){
+
+                    //the result holds your Token Balance that you can assign to a var
+                    self.setState(prevState => ({
+                        characters: [
+                        ...prevState.characters, {
+                            tokenId: characterIdArray[i],
+                            name:result[0],
+                            weapon: result[1],
+                            armor:result[2],
+                            image: result[3],
+                            ratCount: resultTwo[0],
+                            skeletonCount: resultTwo[1],
+                            totalKills: resultTwo[2],
+                            totalDmg: resultTwo[3],
+                            totalRevives: resultTwo[4]
+                        }
+                        ]
+                    }));
+                    return result;
+                    })
+                });
+                }
+            return result;
+            });
     }
     playAs(tokenIndex){
         window.location = `http://54.187.164.49:8080/index.html?tokenId=${this.state.characters[tokenIndex].tokenId}`
@@ -81,7 +122,7 @@ class Profile extends Component{
         return (
             <Col key={index} xs={6} md={4}>
                 {/*<Thumbnail src={characterStill} className="character-card" alt="242x200">*/}
-                <Thumbnail src={`data:image/png;base64, ${image}`} className="character-card" alt="character-image">
+                <Thumbnail src={image} className="character-card" alt="character-image">
                     <h3>{name}</h3>
                     <p>Weapon: {weapon}</p>
                     <p>Armor: {armor}</p>
@@ -102,17 +143,15 @@ class Profile extends Component{
       return rows;
     };
     render(){
-        if (!this.state.showGame){
-            return(
+        return(
+            <div className="browswer-quest-background">
                 <Grid>
                     <Row className="show-grid">
                         {this.renderRows()}
                     </Row>
                 </Grid>            
-            )
-        } else {
-            return <iframe width={'100%'} height={'400px'} title={'BrowswerQuest'} src={`http://54.187.164.49:8080/index.html?tokenId=${this.state.tokenId}`}></iframe>
-        }
+            </div>
+        )
     }
 }
 

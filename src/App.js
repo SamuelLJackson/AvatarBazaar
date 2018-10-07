@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Profile from './components/Profile'
 import Auction from './components/Auction'
 import web3 from './utilities/web3Provider.js'
+import BrowserQuestLogo from './img/BrowserQuestLogo.png'
+import WowLogo from './img/wow.jpeg'
 import './App.css';
 import {abi,address} from './contracts/avatarBazaarAbi.js'
 
@@ -16,8 +18,6 @@ class App extends Component {
     }
     this.toggleDisplay = this.toggleDisplay.bind(this)
 
-    this.handleChange = this.handleChange.bind(this)
-    this.createCharacters = this.createCharacters.bind(this)
     this.display = this.display.bind(this)
   }
   checkUserConnection(){
@@ -32,7 +32,9 @@ class App extends Component {
 
   display(){
     if (this.state.showProfile)
-      return (<Profile userAccount={this.state.userAccount}/>)
+      return (
+      <div>            <h1 style={{paddingLeft: '100px',color:'white',fontFamily: "'Amaranth', sans-serif"}} onClick={this.toggleDisplay.bind(this, 'profile')}>Your Characters</h1>
+      <Profile userAccount={this.state.userAccount}/></div>)
     else
       return (<Auction userAccount={this.state.userAccount} />)
   }
@@ -44,9 +46,6 @@ class App extends Component {
     });
   }
 
-  handleChange(event) {
-    this.setState({charName: event.target.value});
-  }
   openNav() {
       document.getElementById("mySidenav").style.width = "250px";
   }
@@ -54,31 +53,21 @@ class App extends Component {
   closeNav() {
       document.getElementById("mySidenav").style.width = "0";
   }
-  
-  createCharacters(){
-    console.log(this.state.charName);
-    var CharacterContract = new web3.eth.Contract(abi,
-        address, {from: this.props.userAccount});
-    CharacterContract.methods.createCharacter(this.state.charName).send({from:this.state.userAccount}).then(function(result){
-       })
-    }
   render() {
     if (this.state.userAccount != null){
       return (
-        <div>
+        <div className="game-background">
           <div className="nav-bar">
             <span onClick={this.openNav}>&#9776;</span>
             <a href="/" className="nav-bar-title">AvatarBazaar</a>
-            <input type="text" value={this.state.charName} onChange={this.handleChange}></input>
-            <button id="createCharacter" onClick={this.createCharacters}>Create Character</button>
 
           </div>
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>&times;</a>
             <a href="#" onClick={this.closeNav}>About</a>
-            <a href="/" onClick={this.closeNav} onClick={this.toggleDisplay.bind(this, 'profile')}>Profile</a>
+            <a href="/" onClick={this.closeNav}><img src={BrowserQuestLogo} width={"200px"} /></a>
             <a href="/" onClick={this.closeNav} onClick={this.toggleDisplay.bind(this, 'auction')}>Bazaar</a>
-            <a href="#">Clients</a>
+            <a href="#"><img src={WowLogo} width={"200px"} /></a>
             <a href="#">Contact</a>
           </div>
           {this.display()}

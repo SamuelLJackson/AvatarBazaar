@@ -34,6 +34,7 @@ span {
   font-family: italicOstrich !important;
   margin: 50px;
   font-size:3em !important;
+  color:white !important;
 }
 
 .nav-bar a{
@@ -110,3 +111,4 @@ span {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+

@@ -6,7 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url('./img/bg02.jpg')
+  background: -webkit-gradient(radial, center center, 240, center center, 800, from(rgba(0,0,0,0)), to(rgba(0,0,0,1))), url('./img/wood.png') repeat, #000
 }
 
 code {
