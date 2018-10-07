@@ -44,7 +44,7 @@ class Profile extends Component{
         });*/
     }
     playAs() {
-        this.setState({showGame:true,tokenId})
+        this.setState({showGame:true})
     }
     renderRows = () => {
       if (this.state.loading) {
