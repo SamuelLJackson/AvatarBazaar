@@ -3,6 +3,8 @@ import Profile from './components/Profile'
 import Auction from './components/Auction'
 import web3 from './utilities/web3Provider.js'
 import './App.css';
+import {abi,address} from './contracts/avatarBazaarAbi.js'
+
 
 class App extends Component {
   constructor(props){
@@ -10,9 +12,12 @@ class App extends Component {
     this.state = {
       isConnected: false,
       userAccount:null,
-      showProfile:true
+      showProfile:true,
+      charName:''
     }
     this.toggleDisplay = this.toggleDisplay.bind(this)
+
+    this.handleChange = this.handleChange.bind(this)
   }
   checkUserConnection(){
     const accounts = web3.eth.getAccounts((error, accounts )=>{
@@ -37,6 +42,10 @@ class App extends Component {
     }));
   }
 
+
+  handleChange(event) {
+    this.setState({charName: event.target.value});
+  }
   render() {
     if (this.state.userAccount != null){
       return (
@@ -46,6 +55,10 @@ class App extends Component {
             <a href="/" className="nav-bar-title">AB</a>
             <a href="/" onClick={this.toggleDisplay}>Profile</a>
             <a href="/" onClick={this.toggleDisplay}>Ludius Auction</a>
+
+            <input type="text" value={this.state.charName} onChange={this.handleChange}></input>
+            <button id="createCharacter" >Create Character</button>
+
           </div>
           {this.display()}
         </div>
@@ -55,5 +68,7 @@ class App extends Component {
     }
   }
 }
+
+
 
 export default App;
