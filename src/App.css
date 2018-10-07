@@ -37,6 +37,12 @@ span {
   color:white !important;
 }
 
+.bazaar-link{
+  font-family: italicOstrich !important;
+  font-size:3em !important;
+  color:white !important;
+}
+
 .nav-bar a{
   margin:100px;
   padding-top:50px;

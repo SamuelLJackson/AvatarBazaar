@@ -58,15 +58,15 @@ class App extends Component {
       return (
         <div className="game-background">
           <div className="nav-bar">
-            <span onClick={this.openNav}>&#9776;</span>
+            <span onClick={this.openNav} style={{color:'white'}}>&#9776;</span>
             <a href="/" className="nav-bar-title">AvatarBazaar</a>
 
           </div>
           <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onClick={this.closeNav}>&times;</a>
             <a href="#" onClick={this.closeNav}>About</a>
+            <a href="/" onClick={this.closeNav} onClick={this.toggleDisplay.bind(this, 'auction')} className="bazaar-link">Bazaar</a>
             <a href="/" onClick={this.closeNav}><img src={BrowserQuestLogo} width={"200px"} /></a>
-            <a href="/" onClick={this.closeNav} onClick={this.toggleDisplay.bind(this, 'auction')}>Bazaar</a>
             <a href="#"><img src={WowLogo} width={"200px"} /></a>
             <a href="#">Contact</a>
           </div>

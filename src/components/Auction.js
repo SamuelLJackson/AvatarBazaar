@@ -20,13 +20,52 @@ class Auction extends Component{
     handleChange(event) {
         this.setState({charName: event.target.value});
       }
+
     createCharacters(){
-      console.log(this.state.charName);
       var CharacterContract = new web3.eth.Contract(abi,
           address, {from: this.props.userAccount});
-      CharacterContract.methods.createCharacter(this.state.charName).send({from:this.state.userAccount}).then(function(result){
+      CharacterContract.methods.createCharacter(this.state.charName).send(`{from:this.state.userAccount}`).then(function(result){
          })
       }
+
+    componentDidMount() {
+      var ForSaleContract = new web3.eth.Contract(abi,
+        address, {from: this.props.userAccount});
+        var self = this;
+        ForSaleContract.methods.auctions(0).call()
+        .then(function(result){
+            var characterIdArray = result;
+            console.log('charactArray')
+            console.log(characterIdArray)
+            var i = 0;
+            
+                ForSaleContract.methods.viewCharacterDataStepOne(characterIdArray[i]).call()
+                .then(function(result){
+                    ForSaleContract.methods.viewCharacterDataStepTwo(characterIdArray[i]).call()
+                        .then(function(resultTwo){
+                            self.setState(prevState => ({
+                                characters: [
+                                    ...prevState.characters, {
+                                        tokenId: characterIdArray[i],
+                                        name:result[0],
+                                        weapon: result[1],
+                                        armor:result[2],
+                                        image: result[3],
+                                        ratCount: resultTwo[0],
+                                        skeletonCount: resultTwo[1],
+                                        totalKills: resultTwo[2],
+                                        totalDmg: resultTwo[3],
+                                        totalRevives: resultTwo[4]
+                                    }
+                                ]
+                            }));
+                            return resultTwo;
+                        })
+                });
+            
+        return result;
+        });
+    }
     render(){
         return (
             <div style={{marginLeft:'100px'}}>
@@ -39,14 +78,6 @@ class Auction extends Component{
 
             </div>
         )
-        /*
-        return (
-            <div style={{justifyContent:'center',alignItems:'center'}}>
-                <div className="shopping-cart">helllllllllo</div>
-                <div className="game-select"></div>
-            </div>
-        )
-        */
     }
 }
 

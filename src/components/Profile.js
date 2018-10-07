@@ -18,7 +18,16 @@ class Profile extends Component{
           ]
       }
     }
+    auctionOff(tokenIndex){
 
+        var CharacterContract = new web3.eth.Contract(abi,
+            address, {from: this.props.userAccount});
+            var self = this;
+            CharacterContract.methods.auctionCharacter(this.state.characters[tokenIndex].tokenId,"123","222",10000000000).send({from:this.state.userAccount})
+            .then(function(result){
+                console.log(result)
+            })
+    }
     componentDidMount(){
         var CharacterContract = new web3.eth.Contract(abi,
             address, {from: this.props.userAccount});
@@ -65,47 +74,6 @@ class Profile extends Component{
              }
             return result;
             });
-        var ForSaleContract = new web3.eth.Contract(abi,
-            address, {from: this.props.userAccount});
-            var self = this;
-            CharacterContract.methods.getCharactersPerUser().call()
-            .then(function(result){
-            //the result holds your Token Balance that you can assign to a var
-            console.log('characterIdArray:')
-            console.log(result)
-            var characterIdArray = result;
-            var i;
-                //Loop Through each Id that is owned
-                for(i in characterIdArray){
-                //Call Id Details [i] is TicketId
-                CharacterContract.methods.viewCharacterDataStepOne(characterIdArray[i]).call()
-                .then(function(result){
-
-                    CharacterContract.methods.viewCharacterDataStepTwo(characterIdArray[i]).call().then(function(resultTwo){
-
-                    //the result holds your Token Balance that you can assign to a var
-                    self.setState(prevState => ({
-                        characters: [
-                        ...prevState.characters, {
-                            tokenId: characterIdArray[i],
-                            name:result[0],
-                            weapon: result[1],
-                            armor:result[2],
-                            image: result[3],
-                            ratCount: resultTwo[0],
-                            skeletonCount: resultTwo[1],
-                            totalKills: resultTwo[2],
-                            totalDmg: resultTwo[3],
-                            totalRevives: resultTwo[4]
-                        }
-                        ]
-                    }));
-                    return result;
-                    })
-                });
-                }
-            return result;
-            });
     }
     playAs(tokenIndex){
         window.location = `http://54.187.164.49:8080/index.html?tokenId=${this.state.characters[tokenIndex].tokenId}`
@@ -117,8 +85,6 @@ class Profile extends Component{
       var rows = this.state.characters.map((character, index) => {
         const { name,weapon,armor,ratCount,skeletonCount,totalKills,totalDmg,totalRevives,image,forSale} = character;
         var characterStill = forSale ? CharacterStillForSale : CharacterStill
-        console.log('index:')
-        console.log(index)
         return (
             <Col key={index} xs={6} md={4}>
                 {/*<Thumbnail src={characterStill} className="character-card" alt="242x200">*/}
@@ -134,7 +100,7 @@ class Profile extends Component{
                     <p>
                     <Button bsStyle="primary" disabled={forSale} onClick={this.playAs.bind(this,index)}>Play as {name}</Button>
                     &nbsp;
-                    <Button bsStyle="default" disabled={forSale}>Sell {name}</Button>
+                    <Button bsStyle="default" disabled={forSale} onClick={this.auctionOff.bind(this,index)}>Sell {name}</Button>
                     </p>
                 </Thumbnail>
             </Col>
