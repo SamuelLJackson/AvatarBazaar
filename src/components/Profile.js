@@ -59,11 +59,11 @@ class Profile extends Component{
                          weapon: result[1],
                          armor:result[2],
                          image: result[3],
-                         ratCount: resultTwo[0],
-                         skeletonCount: resultTwo[1],
-                         totalKills: resultTwo[2],
-                         totalDmg: resultTwo[3],
-                         totalRevives: resultTwo[4]
+                         ratCount: resultTwo[1],
+                         skeletonCount: resultTwo[2],
+                         totalKills: resultTwo[3],
+                         totalDmg: resultTwo[4],
+                         totalRevives: resultTwo[5]
                        }
                      ]
                    }));
@@ -115,7 +115,7 @@ class Profile extends Component{
                     <Row className="show-grid">
                         {this.renderRows()}
                     </Row>
-                </Grid>            
+                </Grid>
             </div>
         )
     }
