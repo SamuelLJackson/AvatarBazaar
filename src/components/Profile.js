@@ -16,10 +16,12 @@ class Profile extends Component{
 
       this.state = {
           loading: false,
+          showGame: false,
           characters: [
           ]
       }
     }
+
     componentDidMount(){
         var CharacterContract = new web3.eth.Contract(abi,
             address, {from: this.props.userAccount});
@@ -97,13 +99,18 @@ class Profile extends Component{
       return rows;
     };
     render(){
-        return(
-            <Grid>
-                <Row className="show-grid">
-                    {this.renderRows()}
-                </Row>
-            </Grid>
-        )
+        if (!this.state.showGame){
+            return(
+                <Grid>
+                    <Row className="show-grid">
+                        {this.renderRows()}
+                    </Row>
+                </Grid>            
+            )
+        } else {
+            console.log(localStorage.data)
+            return <iframe width={'100%'} height={'400px'} src='http://54.187.164.49:8080/index.html'></iframe>
+        }
     }
 }
 
