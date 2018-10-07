@@ -6,6 +6,9 @@ import Loading from './Loading'
 import web3 from '../utilities/web3Provider.js'
 import {abi,address} from '../contracts/avatarBazaarAbi.js'
 import './Profile.css'
+const sqlite3 = require('sqlite3').verbose();
+ 
+
 
 class Profile extends Component{
     constructor(props) {
