@@ -3,6 +3,56 @@ var abi = [
 		"constant": false,
 		"inputs": [
 			{
+				"name": "_characterId",
+				"type": "uint256"
+			},
+			{
+				"name": "_weapon",
+				"type": "string"
+			},
+			{
+				"name": "_armor",
+				"type": "string"
+			},
+			{
+				"name": "_image",
+				"type": "string"
+			},
+			{
+				"name": "_achievements",
+				"type": "uint256[]"
+			},
+			{
+				"name": "_ratCount",
+				"type": "uint256"
+			},
+			{
+				"name": "_skeletonCount",
+				"type": "uint256"
+			},
+			{
+				"name": "_totalKills",
+				"type": "uint256"
+			},
+			{
+				"name": "_totalDmg",
+				"type": "uint256"
+			},
+			{
+				"name": "_totalRevives",
+				"type": "uint256"
+			}
+		],
+		"name": "save",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "_to",
 				"type": "address"
 			},
@@ -18,243 +68,14 @@ var abi = [
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_characterId",
-				"type": "uint256"
-			},
-			{
-				"name": "_newLoot",
-				"type": "uint256"
-			}
-		],
-		"name": "changeLoot",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_characterName",
-				"type": "string"
-			}
-		],
-		"name": "createCharacter",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_characterId",
-				"type": "uint256"
-			}
-		],
-		"name": "levelUp",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_characterId",
-				"type": "uint256"
-			}
-		],
-		"name": "login",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_characterId",
-				"type": "uint256"
-			}
-		],
-		"name": "logout",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "characterId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "onlineStatus",
-				"type": "bool"
-			}
-		],
-		"name": "newLogin",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "_from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "Transfer",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "characterId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "characterName",
-				"type": "string"
-			}
-		],
-		"name": "newCharacter",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "characterId",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "onlineStatus",
-				"type": "bool"
-			}
-		],
-		"name": "newLogout",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"name": "_approved",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "takeOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "transfer",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_owner",
+				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "balanceOf",
-		"outputs": [
-			{
-				"name": "_balance",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "characterCount",
+		"name": "ownerCharacterCount",
 		"outputs": [
 			{
 				"name": "",
@@ -269,27 +90,15 @@ var abi = [
 		"constant": true,
 		"inputs": [
 			{
-				"name": "",
+				"name": "_characterId",
 				"type": "uint256"
 			}
 		],
-		"name": "characters",
+		"name": "viewAchievements",
 		"outputs": [
 			{
-				"name": "level",
-				"type": "uint256"
-			},
-			{
-				"name": "loot",
-				"type": "uint256"
-			},
-			{
-				"name": "characterName",
-				"type": "string"
-			},
-			{
-				"name": "onlineStatus",
-				"type": "bool"
+				"name": "",
+				"type": "uint256[]"
 			}
 		],
 		"payable": false,
@@ -316,6 +125,38 @@ var abi = [
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_characterId",
+				"type": "uint256"
+			},
+			{
+				"name": "_characterName",
+				"type": "string"
+			}
+		],
+		"name": "changeCharacterName",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "characterCount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [],
 		"name": "getCharactersPerUser",
@@ -331,30 +172,48 @@ var abi = [
 	},
 	{
 		"constant": true,
-		"inputs": [],
-		"name": "owner",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
 		"inputs": [
 			{
 				"name": "",
-				"type": "address"
+				"type": "uint256"
 			}
 		],
-		"name": "ownerCharacterCount",
+		"name": "characters",
 		"outputs": [
 			{
-				"name": "",
+				"name": "characterName",
+				"type": "string"
+			},
+			{
+				"name": "weapon",
+				"type": "string"
+			},
+			{
+				"name": "armor",
+				"type": "string"
+			},
+			{
+				"name": "image",
+				"type": "string"
+			},
+			{
+				"name": "ratCount",
+				"type": "uint256"
+			},
+			{
+				"name": "skeletonCount",
+				"type": "uint256"
+			},
+			{
+				"name": "totalKills",
+				"type": "uint256"
+			},
+			{
+				"name": "totalDmg",
+				"type": "uint256"
+			},
+			{
+				"name": "totalRevives",
 				"type": "uint256"
 			}
 		],
@@ -385,12 +244,63 @@ var abi = [
 		"constant": true,
 		"inputs": [
 			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"name": "_balance",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_characterName",
+				"type": "string"
+			}
+		],
+		"name": "createCharacter",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
 				"name": "_characterId",
 				"type": "uint256"
 			}
 		],
-		"name": "viewCharacterData",
+		"name": "viewCharacterDataStepTwo",
 		"outputs": [
+			{
+				"name": "",
+				"type": "uint256[]"
+			},
 			{
 				"name": "",
 				"type": "uint256"
@@ -398,6 +308,45 @@ var abi = [
 			{
 				"name": "",
 				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_characterId",
+				"type": "uint256"
+			}
+		],
+		"name": "viewCharacterDataStepOne",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
+			},
+			{
+				"name": "",
+				"type": "string"
 			},
 			{
 				"name": "",
@@ -407,9 +356,173 @@ var abi = [
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "transfer",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "takeOwnership",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "_approved",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "characterId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "characterName",
+				"type": "string"
+			}
+		],
+		"name": "newCharacter",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "_characterId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_weapon",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_armor",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_image",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "_achievements",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"name": "_ratCount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_skeletonCount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_totalKills",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_totalDmg",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "_totalRevives",
+				"type": "uint256"
+			}
+		],
+		"name": "saved",
+		"type": "event"
 	}
 ]
 
-var address = '0x2e93ec4307829eb652fd7183e342b0e49f2184d2'
+var address = '0x4e646cbfd2b6f642cb0c12e3f1d2491d7e500c37'
 
 module.exports = {abi: abi, address: address}

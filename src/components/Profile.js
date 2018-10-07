@@ -10,39 +10,78 @@ import './Profile.css'
 class Profile extends Component{
     constructor(props) {
       super(props)
-  
+
       this.state = {
           loading: false,
           characters: [
-              {name: 'Quantstamp', experience: 600, level: 3, forSale:false},
-              {name: 'Shyft', experience: 999, level: 99, forSale:true},
-              {name: 'Celer', experience: 0, level: 5,forSale:false}
           ]
       }
     }
     componentDidMount(){
         var CharacterContract = new web3.eth.Contract(abi,
-            address, {from: this.props.userAddress});
-            CharacterContract.methods.viewCharacterData(0).call()
+            address, {from: this.props.userAccount});
+            var self = this;
+            CharacterContract.methods.getCharactersPerUser().call()
             .then(function(result){
             //the result holds your Token Balance that you can assign to a var
             console.log(result)
+            var characterIdArray = result;
+            var i;
+             //Loop Through each Id that is owned
+             for(i in characterIdArray){
+               console.log(i);
+               //Call Id Details [i] is TicketId
+               CharacterContract.methods.viewCharacterDataStepOne(i).call()
+               .then(function(result){
+                 console.log(result);
+
+                 CharacterContract.methods.viewCharacterDataStepTwo(i).call().then(function(resultTwo){
+                   console.log(resultTwo);
+
+                   //the result holds your Token Balance that you can assign to a var
+                   self.setState(prevState => ({
+                     characters: [
+                       ...prevState.characters, {
+                         name:result[0],
+                         weapon: result[1],
+                         armor:result[2],
+                         image: result[3],
+                         ratCount: resultTwo[0],
+                         skeletonCount: resultTwo[1],
+                         totalKills: resultTwo[2],
+                         totalDmg: resultTwo[3],
+                         totalRevives: resultTwo[4]
+                       }
+                     ]
+                   }));
+                   return result;
+                 })
+               });
+
+             }
             return result;
-        });
+            });
+
+
     }
     renderRows = () => {
       if (this.state.loading) {
         return <Loading />
       }
       var rows = this.state.characters.map((character, index) => {
-        const { name,experience,level,forSale } = character;
+        const { name,weapon,armor,ratCount,skeletonCount,totalKills,totalDmg,totalRevives,forSale} = character;
         var characterStill = forSale ? CharacterStillForSale : CharacterStill
         return (
             <Col key={index} xs={6} md={4}>
                 <Thumbnail src={characterStill} className="character-card" alt="242x200">
                     <h3>{name}</h3>
-                    <p>level; {level}</p>
-                    <p>Experience: {experience}</p>
+                    <p>Weapon: {weapon}</p>
+                    <p>Armor: {armor}</p>
+                    <p>Rat Count: {ratCount}</p>
+                    <p>Skeleton Count: {skeletonCount}</p>
+                    <p>Total Kills: {totalKills}</p>
+                    <p>Total Damage: {totalDmg}</p>
+                    <p>Total Revives: {totalRevives}</p>
                     <p>
                     <Button bsStyle="primary" disabled={forSale}>Play as {name}</Button>
                     &nbsp;
@@ -60,7 +99,7 @@ class Profile extends Component{
                 <Row className="show-grid">
                     {this.renderRows()}
                 </Row>
-            </Grid>            
+            </Grid>
         )
     }
 }
