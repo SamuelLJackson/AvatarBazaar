@@ -26,6 +26,7 @@ class Profile extends Component{
             CharacterContract.methods.getCharactersPerUser().call()
             .then(function(result){
             //the result holds your Token Balance that you can assign to a var
+            console.log('characterIdArray:')
             console.log(result)
             var characterIdArray = result;
             var i;
@@ -44,6 +45,7 @@ class Profile extends Component{
                    self.setState(prevState => ({
                      characters: [
                        ...prevState.characters, {
+                           tokenId: characterIdArray[i],
                          name:result[0],
                          weapon: result[1],
                          armor:result[2],
@@ -64,8 +66,11 @@ class Profile extends Component{
             return result;
             });
     }
-    playAs(tokenId){
-        this.setState({showGame: true,tokenId:tokenId})
+    playAs(tokenIndex){
+        alert(tokenIndex)
+        alert(this.state.characters.length)
+        alert(this.state.characters[tokenIndex].name)
+        window.location = `http://54.187.164.49:8080/index.html?tokenId=${this.state.characters[tokenIndex].tokenId}`
     }
     renderRows = () => {
       if (this.state.loading) {
@@ -74,6 +79,8 @@ class Profile extends Component{
       var rows = this.state.characters.map((character, index) => {
         const { name,weapon,armor,ratCount,skeletonCount,totalKills,totalDmg,totalRevives,forSale} = character;
         var characterStill = forSale ? CharacterStillForSale : CharacterStill
+        console.log('index:')
+        console.log(index)
         return (
             <Col key={index} xs={6} md={4}>
                 <Thumbnail src={characterStill} className="character-card" alt="242x200">
@@ -86,7 +93,7 @@ class Profile extends Component{
                     <p>Total Damage: {totalDmg}</p>
                     <p>Total Revives: {totalRevives}</p>
                     <p>
-                    <Button bsStyle="primary" disabled={forSale} onClick={(index) => this.playAs(index)}>Play as {name}</Button>
+                    <Button bsStyle="primary" disabled={forSale} onClick={this.playAs.bind(this,index)}>Play as {name}</Button>
                     &nbsp;
                     <Button bsStyle="default" disabled={forSale}>Sell {name}</Button>
                     </p>
