@@ -31,11 +31,11 @@ class Profile extends Component{
              for(i in characterIdArray){
                console.log(i);
                //Call Id Details [i] is TicketId
-               CharacterContract.methods.viewCharacterDataStepOne(i).call()
+               CharacterContract.methods.viewCharacterDataStepOne(characterIdArray[i]).call()
                .then(function(result){
                  console.log(result);
 
-                 CharacterContract.methods.viewCharacterDataStepTwo(i).call().then(function(resultTwo){
+                 CharacterContract.methods.viewCharacterDataStepTwo(characterIdArray[i]).call().then(function(resultTwo){
                    console.log(resultTwo);
 
                    //the result holds your Token Balance that you can assign to a var
