@@ -5,14 +5,18 @@ import CharacterStillForSale from '../img/character_still_lg_for_sale.png'
 import Loading from './Loading'
 import web3 from '../utilities/web3Provider.js'
 import {abi,address} from '../contracts/avatarBazaarAbi.js'
+import ColbyCharacter from './Colby.json'
 import './Profile.css'
 
 class Profile extends Component{
     constructor(props) {
       super(props)
   
+      this.playAs = this.playAs.bind(this);
       this.state = {
           loading: false,
+          chosenPlayer: null,
+          showGame: false,
           characters: [
               {name: 'Quantstamp', experience: 600, level: 3, forSale:false},
               {name: 'Shyft', experience: 999, level: 99, forSale:true},
@@ -20,15 +24,28 @@ class Profile extends Component{
           ]
       }
     }
-    componentDidMount(){
+    componentDidMount(){/*
         var CharacterContract = new web3.eth.Contract(abi,
-            address, {from: this.props.userAddress});
-            CharacterContract.methods.viewCharacterData(0).call()
+            address, 
+            {
+                from: this.props.userAccount,
+                gasPrice: '10000000000000',
+                gas: 1000000
+            });
+            console.log(this.props.userAccount)
+            CharacterContract.methods.createCharacter("Carl").call()
             .then(function(result){
-            //the result holds your Token Balance that you can assign to a var
             console.log(result)
             return result;
-        });
+        })
+        .catch((error) =>{
+            console.log(error)
+        });*/
+    }
+    playAs() {
+        localStorage.data = JSON.stringify(ColbyCharacter)
+        console.log(localStorage.data)
+        this.setState({showGame:true})
     }
     renderRows = () => {
       if (this.state.loading) {
@@ -44,7 +61,7 @@ class Profile extends Component{
                     <p>level; {level}</p>
                     <p>Experience: {experience}</p>
                     <p>
-                    <Button bsStyle="primary" disabled={forSale}>Play as {name}</Button>
+                    <Button bsStyle="primary" disabled={forSale} onClick={this.playAs}>Play as {name}</Button>
                     &nbsp;
                     <Button bsStyle="default" disabled={forSale}>Sell {name}</Button>
                     </p>
@@ -55,13 +72,18 @@ class Profile extends Component{
       return rows;
     };
     render(){
-        return(
-            <Grid>
-                <Row className="show-grid">
-                    {this.renderRows()}
-                </Row>
-            </Grid>            
-        )
+        if (!this.state.showGame){
+            return(
+                <Grid>
+                    <Row className="show-grid">
+                        {this.renderRows()}
+                    </Row>
+                </Grid>            
+            )
+        } else {
+            console.log(localStorage.data)
+            return <iframe width={'100%'} height={'400px'} src='http://54.187.164.49:8080/index.html'></iframe>
+        }
     }
 }
 
