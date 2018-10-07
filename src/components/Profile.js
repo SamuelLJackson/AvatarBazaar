@@ -6,9 +6,6 @@ import Loading from './Loading'
 import web3 from '../utilities/web3Provider.js'
 import {abi,address} from '../contracts/avatarBazaarAbi.js'
 import './Profile.css'
-const sqlite3 = require('sqlite3').verbose();
- 
-
 
 class Profile extends Component{
     constructor(props) {
@@ -66,8 +63,9 @@ class Profile extends Component{
              }
             return result;
             });
-
-
+    }
+    playAs(tokenId){
+        this.setState({showGame: true,tokenId:tokenId})
     }
     renderRows = () => {
       if (this.state.loading) {
@@ -88,7 +86,7 @@ class Profile extends Component{
                     <p>Total Damage: {totalDmg}</p>
                     <p>Total Revives: {totalRevives}</p>
                     <p>
-                    <Button bsStyle="primary" disabled={forSale}>Play as {name}</Button>
+                    <Button bsStyle="primary" disabled={forSale} onClick={(index) => this.playAs(index)}>Play as {name}</Button>
                     &nbsp;
                     <Button bsStyle="default" disabled={forSale}>Sell {name}</Button>
                     </p>
@@ -109,7 +107,7 @@ class Profile extends Component{
             )
         } else {
             console.log(localStorage.data)
-            return <iframe width={'100%'} height={'400px'} src='http://54.187.164.49:8080/index.html'></iframe>
+            return <iframe width={'100%'} height={'400px'} title={'BrowswerQuest'} src={`http://54.187.164.49:8080/index.html?tokenId=${this.state.tokenId}`}></iframe>
         }
     }
 }

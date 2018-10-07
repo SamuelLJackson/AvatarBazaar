@@ -11,13 +11,14 @@ class App extends Component {
     this.state = {
       isConnected: false,
       userAccount:null,
-      showProfile:true,
+      showProfile:null,
       charName:''
     }
     this.toggleDisplay = this.toggleDisplay.bind(this)
 
     this.handleChange = this.handleChange.bind(this)
     this.createCharacters = this.createCharacters.bind(this)
+    this.display = this.display.bind(this)
   }
   checkUserConnection(){
     const accounts = web3.eth.getAccounts((error, accounts )=>{
@@ -25,6 +26,7 @@ class App extends Component {
     })
   }
   componentWillMount(){
+    this.setState({showProfile:true})
     this.checkUserConnection();
   }
 
@@ -35,11 +37,14 @@ class App extends Component {
       return (<Auction userAccount={this.state.userAccount} />)
   }
 
-  toggleDisplay(e){
+  toggleDisplay(button,e){
+    console.log(button === 'profile')
+    console.log('before' + this.state.showProfile)
     e.preventDefault();
-    this.setState(prevState => ({
-      displayProfile: !prevState.displayProfile
-    }));
+    this.setState({
+      showProfile: button === 'profile'
+    });
+    console.log('after' + this.state.showProfile)
   }
 
   handleChange(event) {
@@ -54,14 +59,16 @@ class App extends Component {
        })
     }
   render() {
+    console.log("show profile: " + this.state.showProfile)
     if (this.state.userAccount != null){
       return (
         <div>
           {/*<Navbar />*/}
+          
           <div className="nav-bar">
             <a href="/" className="nav-bar-title">AB</a>
-            <a href="/" onClick={this.toggleDisplay}>Profile</a>
-            <a href="/" onClick={this.toggleDisplay}>Ludius Auction</a>
+            <a href="/" onClick={this.toggleDisplay.bind(this, 'profile')}>Profile</a>
+            <a href="/" onClick={this.toggleDisplay.bind(this,'auction')}>Ludius Auction</a>
 
             <input type="text" value={this.state.charName} onChange={this.handleChange}></input>
             <button id="createCharacter" onClick={this.createCharacters}>Create Character</button>
