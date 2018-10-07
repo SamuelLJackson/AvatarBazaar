@@ -67,9 +67,6 @@ class Profile extends Component{
             });
     }
     playAs(tokenIndex){
-        alert(tokenIndex)
-        alert(this.state.characters.length)
-        alert(this.state.characters[tokenIndex].name)
         window.location = `http://54.187.164.49:8080/index.html?tokenId=${this.state.characters[tokenIndex].tokenId}`
     }
     renderRows = () => {
@@ -77,13 +74,14 @@ class Profile extends Component{
         return <Loading />
       }
       var rows = this.state.characters.map((character, index) => {
-        const { name,weapon,armor,ratCount,skeletonCount,totalKills,totalDmg,totalRevives,forSale} = character;
+        const { name,weapon,armor,ratCount,skeletonCount,totalKills,totalDmg,totalRevives,image,forSale} = character;
         var characterStill = forSale ? CharacterStillForSale : CharacterStill
         console.log('index:')
         console.log(index)
         return (
             <Col key={index} xs={6} md={4}>
-                <Thumbnail src={characterStill} className="character-card" alt="242x200">
+                {/*<Thumbnail src={characterStill} className="character-card" alt="242x200">*/}
+                <Thumbnail src={`data:image/png;base64, ${image}`} className="character-card" alt="character-image">
                     <h3>{name}</h3>
                     <p>Weapon: {weapon}</p>
                     <p>Armor: {armor}</p>
@@ -113,7 +111,6 @@ class Profile extends Component{
                 </Grid>            
             )
         } else {
-            console.log(localStorage.data)
             return <iframe width={'100%'} height={'400px'} title={'BrowswerQuest'} src={`http://54.187.164.49:8080/index.html?tokenId=${this.state.tokenId}`}></iframe>
         }
     }

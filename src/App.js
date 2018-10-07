@@ -38,13 +38,10 @@ class App extends Component {
   }
 
   toggleDisplay(button,e){
-    console.log(button === 'profile')
-    console.log('before' + this.state.showProfile)
     e.preventDefault();
     this.setState({
       showProfile: button === 'profile'
     });
-    console.log('after' + this.state.showProfile)
   }
 
   handleChange(event) {
@@ -55,16 +52,12 @@ class App extends Component {
     var CharacterContract = new web3.eth.Contract(abi,
         address, {from: this.props.userAccount});
     CharacterContract.methods.createCharacter(this.state.charName).send({from:this.state.userAccount}).then(function(result){
-       console.log(result);
        })
     }
   render() {
-    console.log("show profile: " + this.state.showProfile)
     if (this.state.userAccount != null){
       return (
         <div>
-          {/*<Navbar />*/}
-          
           <div className="nav-bar">
             <a href="/" className="nav-bar-title">AB</a>
             <a href="/" onClick={this.toggleDisplay.bind(this, 'profile')}>Profile</a>
