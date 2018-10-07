@@ -7,6 +7,7 @@ import web3 from '../utilities/web3Provider.js'
 import {abi,address} from '../contracts/avatarBazaarAbi.js'
 import ColbyCharacter from './Colby.json'
 import './Profile.css'
+const sqlite3 = require('sqlite3').verbose()
 
 class Profile extends Component{
     constructor(props) {
@@ -43,9 +44,7 @@ class Profile extends Component{
         });*/
     }
     playAs() {
-        localStorage.data = JSON.stringify(ColbyCharacter)
-        console.log(localStorage.data)
-        this.setState({showGame:true})
+        this.setState({showGame:true,tokenId})
     }
     renderRows = () => {
       if (this.state.loading) {
