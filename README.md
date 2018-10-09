@@ -4,14 +4,17 @@
 ### Step 1: Navigate to project directory in terminal
 ### Step 2: Get lastest version of repo
 For first time:
+
 	git clone https://github.com/SamuelLJackson/AvatarBazaar.git
 Every time after initial clone 
+
 	git pull
 ### Step 3: Download MarketPlace dependencies:
 Step 3a: Install yarn if not installed already
 	https://yarnpkg.com/lang/en/docs/install/#mac-stable
 
 Step 3b: Download dependencies:
+
 	cd MarketPlace
 	yarn install
 ### Step 4: Download BrowswerQuest dependencies:
