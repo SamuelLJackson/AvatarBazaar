@@ -1,0 +1,8 @@
+.character-card{
+    background-color:lightgray;
+}
+.shopping-cart{
+    background-image: url('../img/Game_Select.png');
+    height: 700px;
+    width: 300px;
+}
