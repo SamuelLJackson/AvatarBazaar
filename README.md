@@ -1,4 +1,4 @@
-# How to run AvatarBazzar and BrowserQuest localy
+# How to run AvatarBazzar and BrowserQuest locally
 
 ## Repo Setup
 ### Step 1: Navigate to project directory in terminal
